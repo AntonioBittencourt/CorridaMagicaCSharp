@@ -1,0 +1,23 @@
+# .NET específico
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.log
+
+# Visual Studio
+.vs/
+.vscode/
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+
+# NuGet packages
+packages/
+
+# Rider (se usar)
+.idea/
