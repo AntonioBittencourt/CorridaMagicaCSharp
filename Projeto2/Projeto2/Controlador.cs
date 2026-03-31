@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -55,6 +55,9 @@ namespace Projeto2
             Thread.Sleep(1000);
             Console.WriteLine("Entendidas as regras? Quando solicitados aperte qualquer tecla para rodar o dado");
             Thread.Sleep(1000);
+            var (primeiroNome, segundoNome) = DecidirQuemComeca();
+            Nome1 = primeiroNome;
+            Nome2 = segundoNome;
             Console.WriteLine("Começando já!");
             Thread.Sleep(1000);
 
@@ -160,6 +163,53 @@ namespace Projeto2
 
         } 
 
+        public (string,string) DecidirQuemComeca()
+        {
+            Console.WriteLine("Decidiremos que começa:");
+
+
+            int dado1, dado2;
+
+
+            do
+            {
+                Thread.Sleep(1000);
+                Console.WriteLine($"{Nome1}, aperte qualquer tecla para rodar seu dado:");
+                Thread.Sleep(1000);
+                Console.ReadKey();
+                Console.WriteLine();
+                dado1 = dado.Sortear();            
+                Thread.Sleep(1000);
+                Console.WriteLine($"{Nome1} sorteou {dado1}");
+                Thread.Sleep(1000);
+                Console.WriteLine($"{Nome2}, aperte qualquer tecla para rodar seu dado:");
+                Thread.Sleep(1000);
+                Console.ReadKey();
+                Console.WriteLine();
+                dado2 = dado.Sortear();
+                Thread.Sleep(1000);
+                Console.WriteLine($"{Nome2} sorteou {dado2}");
+
+                if (dado1 == dado2)
+                    Console.WriteLine($"Ixe Empate! Rolaremos de novo.");
+
+                else
+                    if (dado1 > dado2)
+                {
+                    Console.WriteLine($"{Nome1} começa!");
+                    return (Nome1, Nome2);
+                }
+                else
+                {
+                    Console.WriteLine($"{Nome2} começa!");
+                    return (Nome2, Nome1);
+                }
+
+                    } while (dado1 == dado2);
+                
+                return (Nome1, Nome2);
+            }
+
 
         public void TestaVitoria(bool vencedor, int casa, int outracasa)
         {
@@ -199,8 +249,7 @@ namespace Projeto2
                    
                 if(vencedor == false)
                 Finalizar(vencedor, casa, outracasa);
-
-
+                else
                 Finalizar(vencedor, outracasa, casa);
 
             }
